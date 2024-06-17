@@ -2,11 +2,17 @@
 using Polly.Retry;
 using Polly.Timeout;
 
-namespace Http.Resiliency;
+namespace Http.Resilience.Default;
 
+/// <summary>
+/// Factory class for creating a resilience pipeline.
+/// </summary>
 public static class HttpResilience
 {
-    public static ResiliencePipelineBuilder GetResilienceHandler(ResilienceOptions? options = null)
+    /// <summary>
+    /// Get a resilience pipeline builder with any specified options.
+    /// </summary>
+    public static ResiliencePipelineBuilder GetResiliencePipelineBuilder(ResilienceOptions? options = null)
     {
         options ??= new ResilienceOptions();
         return new ResiliencePipelineBuilder()
@@ -22,8 +28,8 @@ public static class HttpResilience
                         response is HttpResponseMessage result && options.ResponseValidation(result)),
                 Delay = options.Delay,
                 MaxRetryAttempts = options.MaxRetryAttempt,
-                BackoffType = DelayBackoffType.Exponential,
-                UseJitter = true
+                BackoffType = options.BackoffType,
+                UseJitter = options.UseJitter
             });
     }
 }

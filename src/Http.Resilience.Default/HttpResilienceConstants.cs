@@ -1,6 +1,12 @@
-﻿namespace Http.Resiliency;
+﻿namespace Http.Resilience.Default;
 
-public class HttpResilienceConstants
+/// <summary>
+/// Constants for Http Resilience library.
+/// </summary>
+public static class HttpResilienceConstants
 {
+    /// <summary>
+    /// Default pipeline key.
+    /// </summary>
     public const string DefaultPipelineKey = "default_resilience_pipeline";
 }

@@ -4,7 +4,19 @@
         <TargetFramework>net8.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-        <RootNamespace>Http.Resiliency</RootNamespace>
+        <RootNamespace>Http.Resilience.Default</RootNamespace>
+        <Version>1.0.0</Version>
+        <Title>Http.Resilience.Default</Title>
+        <Authors>Owen Krueger</Authors>
+        <Description>Decent defaults for adding resilence to HTTP clients.</Description>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <PackageProjectUrl>https://github.com/Owen-Krueger/Http.Resilience.Default</PackageProjectUrl>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <PackageLicenseFile>LICENSE</PackageLicenseFile>
+        <PackageTags>Http;Resilience;Polly;Retry;</PackageTags>
+        <RepositoryUrl>https://github.com/Owen-Krueger/Http.Resilience.Default</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <PackageReleaseNotes>https://github.com/Owen-Krueger/Http.Resilience.Default/releases/tag/v1.0.0</PackageReleaseNotes>
     </PropertyGroup>
 
     <ItemGroup>
