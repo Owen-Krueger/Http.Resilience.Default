@@ -16,6 +16,17 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Http.Resilience.Default", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Http.Resilience.Default.Tests", "tests\Http.Resilience.Default.Tests\Http.Resilience.Default.Tests.csproj", "{7FDEF655-216F-4970-92E7-656EB51D685E}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{66A640FD-A4C5-4B9D-A6D8-4DC6D60DA844}"
+	ProjectSection(SolutionItems) = preProject
+		.github\CODEOWNERS = .github\CODEOWNERS
+		.github\dependabot.yml = .github\dependabot.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{C9A237CA-B1B3-46AB-B0BD-A7B6906A089D}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\dotnet.yaml = .github\workflows\dotnet.yaml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -34,5 +45,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{ED8E9488-B487-47C0-96B2-30DDE806B63A} = {103B3D51-F293-44F3-A7A5-62A39975194C}
 		{7FDEF655-216F-4970-92E7-656EB51D685E} = {E094020D-593E-4B5B-9774-0D82AC305DFD}
+		{C9A237CA-B1B3-46AB-B0BD-A7B6906A089D} = {66A640FD-A4C5-4B9D-A6D8-4DC6D60DA844}
 	EndGlobalSection
 EndGlobal
