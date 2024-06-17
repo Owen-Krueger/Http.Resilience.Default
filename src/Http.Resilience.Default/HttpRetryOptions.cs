@@ -18,11 +18,8 @@ public static class HttpRetryOptions
         var options = new RetryStrategyOptions
         {
             ShouldHandle = new PredicateBuilder()
-                .Handle<InvalidOperationException>()
                 .Handle<TaskCanceledException>()
-                .Handle<UriFormatException>()
                 .Handle<TimeoutRejectedException>()
-                .Handle<HttpRequestException>()
                 .HandleResult(response =>
                     {
                         if (response is not HttpResponseMessage result)

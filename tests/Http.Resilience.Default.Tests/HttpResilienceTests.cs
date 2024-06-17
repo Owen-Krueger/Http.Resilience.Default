@@ -30,6 +30,24 @@ public class HttpResilienceTests
     }
     
     [Test]
+    public async Task ResiliencePipeline_ExceptionThrown_Retry()
+    {
+        var mock = new AutoMocker();
+        var handler = mock.GetMock<HttpMessageHandler>();
+        handler.Protected()
+            .SetupSequence<Task<HttpResponseMessage>>("SendAsync", ItExpr.IsAny<HttpRequestMessage>(),
+                ItExpr.IsAny<CancellationToken>())
+            .ThrowsAsync(new TaskCanceledException())
+            .ReturnsAsync(new HttpResponseMessage(HttpStatusCode.NoContent));
+        var client = new HttpClient(handler.Object) { BaseAddress = new Uri("http://localhost") };
+        var pipeline = HttpResilience.GetResiliencePipelineBuilder().Build();
+        var response = await pipeline.ExecuteAsync(async ct => await client.GetAsync(string.Empty, ct));
+
+        Assert.That(IsValidStatusCode(response.StatusCode), Is.True);
+        handler.Protected().Verify("SendAsync", Times.Exactly(2), ItExpr.IsAny<HttpRequestMessage>(), ItExpr.IsAny<CancellationToken>());
+    }
+    
+    [Test]
     public async Task ResiliencePipeline_InvalidStatuses_Retry()
     {
         var mock = new AutoMocker();
