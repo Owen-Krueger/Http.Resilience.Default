@@ -28,6 +28,14 @@ public static class HttpClientBuilderExtensions
     
     /// <summary>
     /// Adds a <see cref="IHttpStandardResiliencePipelineBuilder"/> to the <see cref="HttpClient"/> using the default
+    /// resilience options. Timeout specified. If zero, no timeout.
+    /// </summary>
+    public static IHttpResiliencePipelineBuilder AddHttpResilienceHandler(this IHttpClientBuilder builder, 
+        Action<RetryStrategyOptions> configureRetry, TimeSpan timeout)
+        => builder.AddHttpResilienceHandler(HttpResilienceConstants.DefaultPipelineKey, configureRetry, timeout);
+    
+    /// <summary>
+    /// Adds a <see cref="IHttpStandardResiliencePipelineBuilder"/> to the <see cref="HttpClient"/> using the default
     /// resilience options. Optionally specifies a pipeline name, retry strategy options, and timeout.
     /// </summary>
     public static IHttpResiliencePipelineBuilder AddHttpResilienceHandler(this IHttpClientBuilder builder, 

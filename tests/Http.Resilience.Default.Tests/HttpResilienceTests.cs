@@ -41,7 +41,7 @@ public class HttpResilienceTests
             .ReturnsAsync(new HttpResponseMessage(HttpStatusCode.InternalServerError))
             .ReturnsAsync(new HttpResponseMessage(HttpStatusCode.NoContent));
         var client = new HttpClient(handler.Object) { BaseAddress = new Uri("http://localhost") };
-        var pipeline = HttpResilience.GetResiliencePipelineBuilder().Build();
+        var pipeline = HttpResilience.GetResiliencePipelineBuilder(TimeSpan.FromSeconds(20)).Build();
         var response = await pipeline.ExecuteAsync(async ct => await client.GetAsync(string.Empty, ct));
 
         Assert.That(IsValidStatusCode(response.StatusCode), Is.True);
