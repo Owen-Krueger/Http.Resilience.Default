@@ -28,6 +28,8 @@ public static class ServiceCollectionExtensions
     /// resilience options. Optionally specifies a pipeline name, retry strategy options, and timeout.
     /// </summary>
     public static IServiceCollection AddHttpResiliencyPipeline(this IServiceCollection services, 
-        string pipelineKey = HttpResilienceConstants.DefaultPipelineKey, Action<RetryStrategyOptions>? configureRetry = null, TimeSpan? timeout = null)
-        => services.AddResiliencePipeline(pipelineKey, _ => HttpResilience.GetResiliencePipelineBuilder(configureRetry, timeout));
+        string? pipelineKey = null, 
+        Action<RetryStrategyOptions>? configureRetry = null, TimeSpan? timeout = null)
+        => services.AddResiliencePipeline(pipelineKey ?? HttpResilienceConstants.DefaultPipelineKey, 
+            _ => HttpResilience.GetResiliencePipelineBuilder(configureRetry, timeout));
 }

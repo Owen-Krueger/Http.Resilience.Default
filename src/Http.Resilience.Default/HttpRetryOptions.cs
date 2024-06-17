@@ -13,7 +13,7 @@ public static class HttpRetryOptions
     /// <summary>
     /// Configure the retry strategy options.
     /// </summary>
-    public static RetryStrategyOptions ConfigureStrategyOptions(Action<RetryStrategyOptions>? configure)
+    public static RetryStrategyOptions ConfigureStrategyOptions(Action<RetryStrategyOptions>? configureOptions)
     {
         var options = new RetryStrategyOptions
         {
@@ -38,7 +38,7 @@ public static class HttpRetryOptions
             BackoffType = DelayBackoffType.Exponential,
             UseJitter = true,
         };
-        configure?.Invoke(options);
+        configureOptions?.Invoke(options);
         return options;
     }
     
