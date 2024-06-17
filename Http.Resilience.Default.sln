@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{103B3D51-F293-44F3-A7A5-62A39975194C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{E094020D-593E-4B5B-9774-0D82AC305DFD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{94EE0FF5-09C1-491B-AE96-A15E8FD2DAF2}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		CHANGELOG.md = CHANGELOG.md
+		LICENSE = LICENSE
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Http.Resilience.Default", "src\Http.Resilience.Default\Http.Resilience.Default.csproj", "{ED8E9488-B487-47C0-96B2-30DDE806B63A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Http.Resilience.Default.Tests", "tests\Http.Resilience.Default.Tests\Http.Resilience.Default.Tests.csproj", "{7FDEF655-216F-4970-92E7-656EB51D685E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ED8E9488-B487-47C0-96B2-30DDE806B63A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED8E9488-B487-47C0-96B2-30DDE806B63A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED8E9488-B487-47C0-96B2-30DDE806B63A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED8E9488-B487-47C0-96B2-30DDE806B63A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7FDEF655-216F-4970-92E7-656EB51D685E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7FDEF655-216F-4970-92E7-656EB51D685E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7FDEF655-216F-4970-92E7-656EB51D685E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7FDEF655-216F-4970-92E7-656EB51D685E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{ED8E9488-B487-47C0-96B2-30DDE806B63A} = {103B3D51-F293-44F3-A7A5-62A39975194C}
+		{7FDEF655-216F-4970-92E7-656EB51D685E} = {E094020D-593E-4B5B-9774-0D82AC305DFD}
+	EndGlobalSection
+EndGlobal
