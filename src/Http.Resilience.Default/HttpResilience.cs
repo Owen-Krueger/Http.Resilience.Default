@@ -1,6 +1,5 @@
 ﻿using Polly;
 using Polly.Retry;
-using Polly.Timeout;
 
 namespace Http.Resilience.Default;
 
@@ -10,31 +9,25 @@ namespace Http.Resilience.Default;
 public static class HttpResilience
 {
     /// <summary>
-    /// Get a resilience pipeline builder with any specified options.
+    /// Get a resilience pipeline builder with any specified options. Timeout specified.
+    /// If not specified, default is 30 seconds. If zero, no timeout.
     /// </summary>
-    public static ResiliencePipelineBuilder GetResiliencePipelineBuilder(ResilienceOptions? options = null)
+    public static ResiliencePipelineBuilder GetResiliencePipelineBuilder(TimeSpan timeout)
+        => GetResiliencePipelineBuilder(null, timeout);
+    
+    /// <summary>
+    /// Get a resilience pipeline builder with any specified options. Retry strategy options and timeout can
+    /// optionally be configured. If timeout is not specified, default is 30 seconds. If zero, no timeout.
+    /// </summary>
+    public static ResiliencePipelineBuilder GetResiliencePipelineBuilder(Action<RetryStrategyOptions>? configureRetry = null, TimeSpan? timeout = null)
     {
-        options ??= new ResilienceOptions();
+        var timeoutValue = timeout ?? TimeSpan.FromSeconds(30);
         var builder = new ResiliencePipelineBuilder()
-            .AddRetry(new RetryStrategyOptions
-            {
-                ShouldHandle = new PredicateBuilder()
-                    .Handle<InvalidOperationException>()
-                    .Handle<TaskCanceledException>()
-                    .Handle<UriFormatException>()
-                    .Handle<TimeoutRejectedException>()
-                    .Handle<HttpRequestException>()
-                    .HandleResult(response =>
-                        response is HttpResponseMessage result && options.ResponseValidation(result)),
-                Delay = options.Delay,
-                MaxRetryAttempts = options.MaxRetryAttempt,
-                BackoffType = options.BackoffType,
-                UseJitter = options.UseJitter
-            });
-
-        if (options.UseTimeout)
+            .AddRetry(HttpRetryOptions.ConfigureStrategyOptions(configureRetry));
+        
+        if (timeoutValue != TimeSpan.Zero)
         {
-            builder.AddTimeout(options.Timeout);
+            builder.AddTimeout(timeoutValue);
         }
 
         return builder;

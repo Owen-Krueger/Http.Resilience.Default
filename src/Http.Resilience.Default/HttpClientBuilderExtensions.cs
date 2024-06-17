@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Http.Resilience;
+using Polly.Retry;
 
 namespace Http.Resilience.Default;
 
@@ -13,17 +14,22 @@ public static class HttpClientBuilderExtensions
     /// Adds a <see cref="IHttpStandardResiliencePipelineBuilder"/> to the <see cref="HttpClient"/> using the default
     /// resilience options.
     /// </summary>
-    public static IHttpResiliencePipelineBuilder AddHttpResiliencyPipeline(this IHttpClientBuilder builder, 
-        ResilienceOptions? options = null)
-        => builder.AddResilienceHandler(HttpResilienceConstants.DefaultPipelineKey, 
-            _ => HttpResilience.GetResiliencePipelineBuilder(options));
+    public static IHttpResiliencePipelineBuilder AddHttpResiliencyPipeline(this IHttpClientBuilder builder, Action<RetryStrategyOptions> configureRetry)
+        => builder.AddHttpResiliencyPipeline(HttpResilienceConstants.DefaultPipelineKey, configureRetry);
     
     /// <summary>
     /// Adds a <see cref="IHttpStandardResiliencePipelineBuilder"/> to the <see cref="HttpClient"/> using the default
-    /// resilience options. Optionally specifies a pipeline name.
+    /// resilience options. Timeout specified. If zero, no timeout.
+    /// </summary>
+    public static IHttpResiliencePipelineBuilder AddHttpResiliencyPipeline(this IHttpClientBuilder builder, TimeSpan timeout)
+        => builder.AddHttpResiliencyPipeline(HttpResilienceConstants.DefaultPipelineKey, null, timeout);
+    
+    /// <summary>
+    /// Adds a <see cref="IHttpStandardResiliencePipelineBuilder"/> to the <see cref="HttpClient"/> using the default
+    /// resilience options. Optionally specifies a pipeline name, retry strategy options, and timeout.
     /// </summary>
     public static IHttpResiliencePipelineBuilder AddHttpResiliencyPipeline(this IHttpClientBuilder builder, 
-        string? pipelineName = null, ResilienceOptions? options = null)
+        string? pipelineName = null, Action<RetryStrategyOptions>? configureRetry = null, TimeSpan? timeout = null)
         => builder.AddResilienceHandler(pipelineName ?? HttpResilienceConstants.DefaultPipelineKey, 
-            _ => HttpResilience.GetResiliencePipelineBuilder(options));
+            _ => HttpResilience.GetResiliencePipelineBuilder(configureRetry, timeout));
 }

@@ -23,4 +23,15 @@
       <PackageReference Include="Microsoft.Extensions.Http.Resilience" Version="8.6.0" />
     </ItemGroup>
 
+    <ItemGroup>
+        <None Include="..\..\LICENSE">
+            <Pack>True</Pack>
+            <PackagePath>\</PackagePath>
+        </None>
+        <None Include="..\..\README.md">
+            <Pack>True</Pack>
+            <PackagePath>\</PackagePath>
+        </None>
+    </ItemGroup>
+    
 </Project>
