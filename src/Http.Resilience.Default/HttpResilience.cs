@@ -15,7 +15,7 @@ public static class HttpResilience
     public static ResiliencePipelineBuilder GetResiliencePipelineBuilder(ResilienceOptions? options = null)
     {
         options ??= new ResilienceOptions();
-        return new ResiliencePipelineBuilder()
+        var builder = new ResiliencePipelineBuilder()
             .AddRetry(new RetryStrategyOptions
             {
                 ShouldHandle = new PredicateBuilder()
@@ -31,5 +31,12 @@ public static class HttpResilience
                 BackoffType = options.BackoffType,
                 UseJitter = options.UseJitter
             });
+
+        if (options.UseTimeout)
+        {
+            builder.AddTimeout(options.Timeout);
+        }
+
+        return builder;
     }
 }
