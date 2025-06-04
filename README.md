@@ -1,3 +1,7 @@
+** Archived in favor of Microsoft's resillience packages: https://learn.microsoft.com/en-us/dotnet/core/resilience/http-resilience **
+
+
+
 # Http Resilience Default NuGET Package
 
 [![.NET](https://github.com/Owen-Krueger/Http.Resilience.Default/actions/workflows/dotnet.yaml/badge.svg)](https://github.com/Owen-Krueger/Http.Resilience.Default/actions/workflows/dotnet.yaml)
